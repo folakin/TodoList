@@ -20,6 +20,7 @@ next_id = 1
 class TaskRequest(BaseModel):
     name: str
     priority: str
+    description: str
 
 @app.get("/tasks")
 def get_tasks():
@@ -28,30 +29,31 @@ def get_tasks():
 @app.post("/tasks")
 def add_tasks(task: TaskRequest):
     global next_id
-    nt = Task(task.name, task.priority)
-    nt.id = next_id
+    nt = Task(task.name, task.priority, task.description)
+    nt.set_id(next_id)  # Now set the id property on the object
     next_id += 1
     tasks[nt.id] = nt
-    return {'Task created': nt.to_dict() }
+    return tasks
+   #return {'Task created': nt.to_dict() }
 
-@app.put("/tasks/{next_id}")
-def comp(next_id: int):
-    if next_id in tasks:
-        tasks[next_id].complete()
+@app.put("/tasks/{id}")
+def complete_task(id: int):
+    if id in tasks:
+        tasks[id].complete()
         return {
             "message": "Task marked as complete",
             "task": {
-                "id": next_id,
-                "name": tasks[next_id].name,
+                "id": id,
+                "name": tasks[id].name,
                 "status": "is completed"
             }
         }
     raise HTTPException(status_code=404, detail="Task not found")
 
-@app.delete("/tasks/{next_id}")
-def delete_task(next_id: int):
-    if next_id in tasks:
-        tasks[next_id].delete()
+@app.delete("/tasks/{id}")
+def delete_task(id: int):
+    if id in tasks:
+        tasks[id].delete()
         return 'Task deleted'
     raise HTTPException(status_code=400, detail="Task not found")
 
