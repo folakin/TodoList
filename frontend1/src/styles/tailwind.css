@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles */
+
+@import './Form.css';
+@import './index.css';
+@import './App.css';

@@ -110,7 +110,13 @@ const Form = () =>  {
     <form onSubmit={handleSubmit}>
         <div>
             <input tabIndex={1} type="text" placeholder="Enter Task Name" value={taskName} onChange={(e) => setTaskName(e.target.value)} /> <br></br>
-            <input tabIndex={2} type="text" placeholder="Enter Task Priority" value={taskPriority} onChange={(e) => setTaskPriority(e.target.value)} /> <br></br>
+            <select tabIndex={2} value={taskPriority} onChange={(e) => setTaskPriority(e.target.value)}>
+                <option value="">Select Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select> <br></br>
+          {/*  <input tabIndex={2} type="text" placeholder="Enter Task Priority" value={taskPriority} onChange={(e) => setTaskPriority(e.target.value)} /> <br></br> */}
             <input tabIndex={2} type="text" placeholder="Enter Task Description" value={taskDesc} onChange={(e) => setTaskDesc(e.target.value)} /> <br></br>
         </div>
 

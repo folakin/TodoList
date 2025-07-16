@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from './Form';
-import './App.css';
+import './styles/App.css';
 
 
 // Main App component that renders the Form and ViewTasks components
