@@ -9,6 +9,7 @@ const Form = () =>  {
     const [taskDesc, setTaskDesc] = useState('');
     const [tasks, setTasks] = useState([]);
     const [showTasks, setShowTasks] = useState(false);
+    const [showCompletedTasks, setShowCompletedTasks] = useState(true);
 
 
     const addTask = async(name, priority) => {
@@ -83,18 +84,24 @@ const Form = () =>  {
         } catch (error) {
             console.error('Error completing task:', error);
         }
+        fetchTasks();
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Validate input
         await addTask(taskName, taskPriority, taskDesc);
-        await fetchTasks();
+        //await fetchTasks();
        
     };
 
     const handleToggle = () => {
+        fetchTasks();
         setShowTasks(prev => !prev);
+    }
+
+    const handleViewCompletedTasks = () => {
+        setShowCompletedTasks(prev => !prev);
     }
 
         // Handle form submission logic here
@@ -111,7 +118,8 @@ const Form = () =>  {
             <button tabIndex={3}>Add Task</button>
         </div>
         <div>
-            <button type="button" tabIndex={4} onClick={handleToggle}>{showTasks ? 'Hide Tasks' : 'View Tasks'}</button>
+            <button type="button" tabIndex={4} onClick={handleToggle}>{showTasks ? 'Hide Tasks' : 'View Tasks'}</button><br />
+            <button type="button" tabIndex={5} onClick={handleViewCompletedTasks}> {showCompletedTasks ? 'Hide Completed Tasks' : 'View Completed Tasks'}</button> <br />
         </div>
         <div>
             {showTasks && (
@@ -120,13 +128,26 @@ const Form = () =>  {
                     .filter((task) => !task.completed)
                     .map((task) => (
                         <li key={task.id}>
-                            {task.name} - {task.priority} - {task.description && <span>Description: {task.description}</span>}
+                            {task.name} - {task.priority} - {task.description && <span>Description: {task.description}</span>}<br />
                             <button type="button" onClick={() => completeTask(task.id)}>Complete</button>
                         </li>
                     ))}
                 </ul>
             )}
         </div>
+
+        <div>
+            {showCompletedTasks && (
+                <ul>
+                    {tasks.filter((task) => task.completed).map((task) => (
+                        <li key={task.id}>
+                            {task.name} - {task.priority} - {task.description && <span>Description: {task.description}</span>} <br />
+                            <span style={{ color: 'green' }}>Completed</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>  
     </form>
     );
 }
