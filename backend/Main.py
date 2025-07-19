@@ -4,8 +4,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
 from test_mongo import lifespan
+from SignUp import router as signup_router
+
+
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(signup_router)
 
 app.add_middleware(
     CORSMiddleware,

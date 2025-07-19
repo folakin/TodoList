@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from './Form';
-import LogIn from './LogIn';
+import SignUp from './SignUp';
 import './styles/App.css';
 import './styles/tailwind.css';
 
@@ -9,17 +9,13 @@ import './styles/tailwind.css';
 const App = () => {
   return ( 
   <div>
-    <LogIn />
-    <br />
-    <br />
-    <br />
+    <SignUp />  
     <h1> Task Manager </h1> 
       <h1> Welcome to your Task Manager </h1>
       <h2> LET'S GET STARTED </h2>
       <br />
       <br />
       <Form />
-     {/* <ViewTasks /> */}
     </div>
   );
 }

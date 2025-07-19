@@ -9,7 +9,7 @@ load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URI)
-db = client["subtask-Demo"]  # Uses default DB from URI
+db = client["subtask-demo"]  # Uses default DB from URI
 
 def get_database():
     return db
