@@ -121,7 +121,12 @@ const Form = () =>  {
         </div>
 
         <div>
-            <button tabIndex={3}>Add Task</button>
+            <button
+                tabIndex={3}
+                className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition"
+            type='submit'>
+                Add Task
+            </button>
         </div>
         <div>
             <button type="button" tabIndex={4} onClick={handleToggle}>{showTasks ? 'Hide Tasks' : 'View Tasks'}</button><br />
