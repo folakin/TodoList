@@ -1,7 +1,19 @@
 from fastapi import FastAPI
-from mongo import get_database
 from fastapi.concurrency import run_in_threadpool
 from contextlib import asynccontextmanager
+import motor.motor_asyncio
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URI)
+db = client["subtask-Demo"]  # Uses default DB from URI
+
+def get_database():
+    return db
+
 
 db = get_database()
 
